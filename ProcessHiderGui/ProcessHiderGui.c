@@ -20,7 +20,6 @@ void Log(LPCWSTR lpLog);
 
 typedef struct _DATA_PROCESS {
     HANDLE pid;
-    UCHAR imageName[100];
 } DATA_PROCESS, *PDATA_PROCESS;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)

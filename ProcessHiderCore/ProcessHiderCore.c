@@ -6,14 +6,9 @@
 
 #define IOCTL_GET_PID CTL_CODE(FILE_DEVICE_UNKNOWN, 0x800, METHOD_BUFFERED, FILE_ANY_ACCESS)
 
-
-
 typedef struct _DATA_PROCESS {
     HANDLE pid;
-    UCHAR imageName[100];
 } DATA_PROCESS, *PDATA_PROCESS;
-
-LIST_ENTRY g_BackupEntry = { 0 };
 
 VOID DriverUnload(PDRIVER_OBJECT DriverObject);
 NTSTATUS DispatchIoctl(PDEVICE_OBJECT pDevObj, PIRP pIrp);
@@ -163,7 +158,6 @@ VOID RmProcess(HANDLE ProcessId)
         if (PsGetProcessId(pProc) == ProcessId)
         {
             PLIST_ENTRY pLink = (PLIST_ENTRY)((PCHAR)pProc + ActiveProcessLinksOffset);
-            //g_BackupEntry = *pLink;
             RemoveEntryList(pLink);
             //ExFreePool(pLink);
         }
