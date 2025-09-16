@@ -120,7 +120,7 @@ NTSTATUS DefaultDispatch(PDEVICE_OBJECT DeviceObject, PIRP Irp)
     return STATUS_SUCCESS;
 }
 
-// 函数参数可以在必要时获取 ImageFileName 偏移量，此参数可以为 NULL
+// 鍑芥暟鍙傛暟鍙互鍦ㄥ繀瑕佹椂鑾峰彇 ImageFileName 鍋忕Щ閲忥紝姝ゅ弬鏁板彲浠ヤ负 NULL
 ULONG GetActiveProcessLinksOffset(PULONG ImageFileNameOffset)
 {
     ULONG ActiveProcessLinksOffset = 0;
@@ -142,7 +142,7 @@ PEPROCESS GetNextProcess(PEPROCESS CurrentProcess)
 {
     ULONG ActiveProcessLinksOffset = GetActiveProcessLinksOffset(NULL);
 
-    PLIST_ENTRY pNextLink = (PLIST_ENTRY)((PCHAR)CurrentProcess + ActiveProcessLinksOffset);
+    PLIST_ENTRY pLink = (PLIST_ENTRY)((PCHAR)CurrentProcess + ActiveProcessLinksOffset);
     PEPROCESS pNextProc = (PEPROCESS)((PCHAR)pNextLink->Flink - ActiveProcessLinksOffset);
     return pNextProc;
 }
